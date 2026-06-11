@@ -2,11 +2,6 @@ const form = document.querySelector(".form");
 const input = document.querySelector(".input");
 const list = document.querySelector(".list");
 
-let currentInput;
-input.addEventListener("input", (event) => {
-  currentInput = event.target.value;
-  console.log(currentInput);
-});
 const state = {
   items: [],
   addItem(value) {
@@ -17,9 +12,11 @@ const state = {
     });
   },
 };
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   state.addItem(input.value);
+  console.log(state);
   renderList();
   input.value = "";
 });
@@ -43,6 +40,7 @@ function renderList() {
 
     btnCheck.addEventListener("click", (e) => {
       const complete = state.items.find((i) => i.id === item.id);
+      console.log(complete);
       complete.isCompleted = !complete.isCompleted;
       if (complete.isCompleted) {
         span.classList.add("checked");
