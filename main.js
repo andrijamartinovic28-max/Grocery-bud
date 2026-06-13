@@ -28,7 +28,7 @@ function renderList() {
     const span = document.createElement("span");
     const divBtn = document.createElement("div");
     const btnCheck = document.createElement("button");
-    btnCheck.type = "radio";
+
     const btnDelete = document.createElement("button");
     span.innerHTML = `${item.name}`;
     span.classList.add("span");
@@ -40,17 +40,19 @@ function renderList() {
 
     btnCheck.addEventListener("click", (e) => {
       const complete = state.items.find((i) => i.id === item.id);
-      console.log(complete);
+
       complete.isCompleted = !complete.isCompleted;
       if (complete.isCompleted) {
         span.classList.add("checked");
       } else {
         span.classList.remove("checked");
       }
+      console.log(state.items);
     });
 
     btnDelete.addEventListener("click", (e) => {
       state.items = state.items.filter((i) => i.id !== item.id);
+
       renderList();
     });
 

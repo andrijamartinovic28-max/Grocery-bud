@@ -94,4 +94,5 @@ h1 {
 }
 .span {
   margin-right: 290px;
+  text-transform: capitalize;
 }
