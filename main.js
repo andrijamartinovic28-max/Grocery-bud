@@ -11,6 +11,13 @@ const state = {
       isCompleted: false,
     });
   },
+  removeItem(id) {
+    this.items = state.items.filter((i) => i.id !== id);
+  },
+  updateItem(id) {
+    const complete = this.items.find((i) => i.id === id);
+    complete.isCompleted = !complete.isCompleted;
+  },
 };
 
 form.addEventListener("submit", (event) => {
@@ -39,20 +46,13 @@ function renderList() {
     btnDelete.innerHTML = `Delte`;
 
     btnCheck.addEventListener("click", (e) => {
-      const complete = state.items.find((i) => i.id === item.id);
-
-      complete.isCompleted = !complete.isCompleted;
-      if (complete.isCompleted) {
-        span.classList.add("checked");
-      } else {
-        span.classList.remove("checked");
-      }
-      console.log(state.items);
+      state.updateItem(item.id);
+      span.classList.toggle("checked");
+      console.log(state);
     });
 
     btnDelete.addEventListener("click", (e) => {
-      state.items = state.items.filter((i) => i.id !== item.id);
-
+      state.removeItem(item.id);
       renderList();
     });
 
